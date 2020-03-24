@@ -15,9 +15,9 @@ def index():
 def secundaria():
     return "<h1>Pagina Secundaria </h1>"
 
-@app.route("/testejson/<temperatura>") 
-def testejson(temperatura):
-	return jsonify({"ObjetoTemperatura" : "{}"}).format(temperatura)
+@app.route("/testejson") 
+def testejson():
+	return jsonify({"ObjetoTemperatura" : "temperatura"})
 
 
 def pagina():
