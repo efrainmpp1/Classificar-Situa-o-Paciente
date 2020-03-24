@@ -11,21 +11,18 @@ def index():
     return "<h1>Hello Efrain!</h1>"
 
 @app.route("/secundaria", methods=['GET'])    
-<<<<<<< HEAD
+
 def secundaria():
     return "<h1>Pagina Secundaria </h1>"
 
 @app.route("/testejson/<temperatura>") 
 def testejson(temperatura):
 	return jsonify({"ObjetoTemperatura" : "{}"}).format(temperatura)
-=======
+
+
 def pagina():
     return "<h1>Testando pagina Secundaria no Heroku </h1>"
 
-@app.route("/testejson")
-def testejson():
-	return jsonify({"ObjetoTemperatura" : "temperatura"})
->>>>>>> origin
 
 def main():
     port = int(os.environ.get("PORT", 5000))
