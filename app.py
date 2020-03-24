@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask , jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -13,6 +13,10 @@ def index():
 @app.route("/secundaria", methods=['GET'])    
 def pagina():
     return "<h1>Testando pagina Secundaria no Heroku </h1>"
+
+@app.route("/testejson/<float:temperatura>")
+def testejson():
+	return jsonify({"ObjetoTemperatura" : "temperatura"})
 
 def main():
     port = int(os.environ.get("PORT", 5000))
