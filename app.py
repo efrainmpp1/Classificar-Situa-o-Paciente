@@ -17,8 +17,7 @@ def secundaria():
 
 @app.route("/testejson") 
 def testejson():
-	temperatura = request.args.get('temperatura')
-	return jsonify({"ObjetoTemperatura" : ' {}. '}).format(temperatura)
+	return jsonify({"ObjetoTemperatura" : 'temperatura'})
 
 
 def pagina():
