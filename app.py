@@ -1,5 +1,5 @@
 import os
-from flask import Flask , jsonify
+from flask import Flask , jsonify , request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -17,7 +17,8 @@ def secundaria():
 
 @app.route("/testejson") 
 def testejson():
-	return jsonify({"ObjetoTemperatura" : "temperatura"})
+	temperatura = request.args.get('temperatura')
+	return jsonify({"ObjetoTemperatura" : ' {}. '}).format(temperatura)
 
 
 def pagina():
