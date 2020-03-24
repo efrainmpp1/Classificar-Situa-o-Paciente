@@ -20,9 +20,17 @@ def testejson():
 	return jsonify({"ObjetoTemperatura" : 'temperatura'})
 
 
-def pagina():
-    return "<h1>Testando pagina Secundaria no Heroku </h1>"
+@app.route('/processojson' , methods=['POST'])
+def processocomjson():
+	dados = request.get_json()
 
+	nome = dados['nome']
+
+	localizacao = dados['localizacao']
+
+	temperatura = dados['temperatura']
+
+	return jsonify({'enviado' : 'ok' , 'nome' : nome , 'localizacao' : localizacao , 'temperatura' : temperatura})
 
 def main():
     port = int(os.environ.get("PORT", 5000))
