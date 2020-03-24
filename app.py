@@ -14,7 +14,7 @@ def index():
 def pagina():
     return "<h1>Testando pagina Secundaria no Heroku </h1>"
 
-@app.route("/testejson/<float:temperatura>")
+@app.route("/testejson")
 def testejson():
 	return jsonify({"ObjetoTemperatura" : "temperatura"})
 
