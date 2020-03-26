@@ -2,7 +2,7 @@ import os
 from os.path import isfile
 from flask import Flask , jsonify , request
 from flask_cors import CORS
-from json import dump , load
+#from json import dump , load
 
 def lerjson():
 	with open('dados.json' , 'r' , encoding='utf8') as f:
@@ -38,7 +38,7 @@ def processocomjson():
 	espirro = dados['espirro']
 
 	return jsonify({'entregue' : 'ok' , 'localizacao' : localizacao , 'temperatura' : temperatura , 'diarreia' : diarreia , 'espirro' : espirro})
-	
+
 '''
 
 def main():
