@@ -16,16 +16,16 @@ cors = CORS(app, resource={r"/*":{"origins": "*"}})
 def index():
     return "<h1>Teste APP PROCESSOS DE DADOS!</h1>"
 
-
+'''
 @app.route('/processojson' , methods=['POST'])
 def processocomjson():
-	'''dados = request.get_json()
+	dados = request.get_json()
 
 	nome = dados['nome']
 
 	localizacao = dados['localizacao']
 
-	temperatura = dados['temperatura'] '''
+	temperatura = dados['temperatura'] 
 
 	dados = lerjson()
 
@@ -38,6 +38,8 @@ def processocomjson():
 	espirro = dados['espirro']
 
 	return jsonify({'entregue' : 'ok' , 'localizacao' : localizacao , 'temperatura' : temperatura , 'diarreia' : diarreia , 'espirro' : espirro})
+	
+'''
 
 def main():
     port = int(os.environ.get("PORT", 5000))
