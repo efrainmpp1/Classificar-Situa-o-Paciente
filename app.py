@@ -3,11 +3,6 @@ from flask import Flask ,  request
 from flask_cors import CORS
 import json
 
-#Definindo variaveis previamente
-idoso = 0
-sangue = 0
-pulmao = 0
-
 app = Flask(__name__)
 
 cors = CORS(app, resource={r"/*":{"origins": "*"}})
@@ -35,6 +30,10 @@ def classificar():
 	nariz = dados['nariz']
 	fadiga = dados['fadiga']
 	nausea = dados['nausea']
+	#Definindo variaveis previamente
+	idoso = 0
+	sangue = 0
+	pulmao = 0
 	febre = 0
 
 	if idade > 50:
