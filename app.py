@@ -18,53 +18,38 @@ def classificar():
 	comorbidade = dados['comorbidade']
 	contatoSuspeito = dados['contatoSuspeito']
 	temperatura = dados['temperatura']
-	pulso = dados['pulso']
 	respiracao = dados['respiracao']
 	tosseSeca = dados['tosseSeca']
-	diarreia = dados['diarreia']
-	fApetite = dados['fApetite']
-	odores = dados['odores']
-	sabores = dados['sabores']
 	dorGarganta = dados['dorGarganta']
-	dorCorpo = dados['dorCorpo']
-	nariz = dados['nariz']
-	fadiga = dados['fadiga']
-	nausea = dados['nausea']
 	#Definindo variaveis previamente
-	idoso = 0
-	sangue = 0
-	pulmao = 0
-	febre = 0
+	idoso = False
+	pulmao = False
+	febre = False
 
 	if idade > 50:
-		idoso = 1
+		idoso = True
 
 	if temperatura > 37:
-		febre = 1
-	
-	if pulso < 60:
-		sangue = 1
+		febre = True
 
 	if respiracao > 20:
-		pulmao = 1
+		pulmao = True
+
+	# sintomas gripais, caso tenha febre e pelo menos um dos casos abaixo
+	sintomas_gripais = febre and (tosseSeca or nariz or dorGarganta or pulmao)
 	
-	if (comorbidade == 0):
-		if (febre == 0) and ((tosseSeca == 0) or (nariz == 0) or (dorGarganta == 0) or (pulmao == 0)):
-			return { 'situacao' : 'Situaçao 1'}
-		else:
-			if idoso == 1 :
-				return { 'situacao' : 'Situaçao 4'}
-			else:
-				return { 'situacao' : 'Situaçao 2'}
+	situacao = 1
 
-	else:
-		if (febre == 0) and ((tosseSeca == 0) or (nariz == 0) or (dorGarganta == 0) or (pulmao == 0)):
-			if idoso == 1:
-				return {'situacao' : 'Situação 5'}
+	if comorbidade and sintomas_gripais :
+		situacao = 5 if idoso else 3
 
-			else:
-				return {'situacao' : 'Situação 3'}
+	elif sintomas_gripais:
+		situacao = 4 if idoso else 2
 
+	elif comorbidade and febre :
+		situacao = 2
+
+	return {'situacao' : situacao}
 
 def main():
     port = int(os.environ.get("PORT", 5000))
