@@ -5,8 +5,6 @@ import json
 
 app = Flask(__name__)
 
-arquivo = open('localizacoes_Risco.txt' , 'w')
-
 cors = CORS(app, resource={r"/*":{"origins": "*"}})
 
 @app.route("/", methods=['GET'])
@@ -36,9 +34,6 @@ def classificar():
 	fadiga = dados['fadiga']
 	nausea = dados['nausea']
 
-	# Gerar um vetor com as variaveis Patologicas
-
-	patologicas = [tosseSeca , diarreia , fApetite , sabores , odores , dorGarganta , dorCorpo , nariz , fadiga , nausea]
 
 	# Nivel da Temperatura
 
@@ -80,7 +75,7 @@ def classificar():
 		NFR = 5
 
 	elif(respiracao > 12 and respiracao <= 13) or (respiracao >= 19 and respiracao < 20):
-	NFR = 4
+		NFR = 4
 	
 	elif(respiracao > 13 and respiracao <= 14) or (respiracao >= 18 and respiracao < 19):
 		NFR = 3
@@ -93,14 +88,23 @@ def classificar():
 
 	# Gerando 5 ou 1 com as Variaveis Patologicas 
 
-	for n in patologicas:
-		n = 5 if n else 1
+	tosseSeca = 5 if tosseSeca else 1
+	diarreia = 5 if diarreia else 1
+	fApetite = 5 if fApetite else 1
+	sabores = 5 if sabores else 1
+	odores = 5 if odores else 1
+	dorGarganta = 5 if dorGarganta else 1
+	dorCorpo = 5 if dorCorpo else 1
+	nariz = 5 if nariz else 1
+	fadiga = 5 if fadiga else 1
+	nausea = 5 if nausea else 1
+
 
 	# Peso dos Sinais Vitais (Podem mudar de acordo com a porcentagem das ocorrencias em casos de COVID)
 	
-	t = 0.8
+	t = 0.67
 	pu = 0.03
-	fr = 0.17
+	fr = 0.3
 
 	# Peso dos Sinais Patologicos (Pode variar de acordo com a porcentagem de ocorrencia em casos de COVID)
 
@@ -142,13 +146,6 @@ def classificar():
 
 	elif(RGUT >= 53):
 		situacao = 5
-
-	#Usar o arquivo txt para mandar a localizações de casos de risco
-	global arquivo
-
-	if situacao >= 3:
-		arquivo.write(situacao "\n")
-		arquivo.write(localizacao "\n")
 
 	return { 'situacao' : situacao }
 
