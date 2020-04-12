@@ -99,7 +99,7 @@ def classificar():
 
 	# Peso dos Sinais Vitais (Podem mudar de acordo com a porcentagem das ocorrencias em casos de COVID)
 	
-	t = 0.67
+	t = 0.7
 	pu = 0.03
 	fr = 0.3
 
