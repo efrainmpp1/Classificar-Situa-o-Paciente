@@ -17,9 +17,7 @@ def classificar():
 	# Fazer requisicao de informacao via JSON
 	dados = request.get_json()
 	# Localização identificada por CEP
-	localizacao = dados['localizacao']
 	comorbidade = dados['comorbidade']
-	contatoSuspeito = dados['contatoSuspeito']
 	temperatura = dados['temperatura']
 	pulso = dados['pulso']
 	respiracao = dados['respiracao']
@@ -33,7 +31,6 @@ def classificar():
 	nariz = dados['nariz']
 	fadiga = dados['fadiga']
 	nausea = dados['nausea']
-
 
 	# Nivel da Temperatura
 
@@ -108,7 +105,7 @@ def classificar():
 
 	# Peso dos Sinais Patologicos (Pode variar de acordo com a porcentagem de ocorrencia em casos de COVID)
 
-	to = 0.51
+	to = 0.6
 	di = 0.02
 	fa = 0.01
 	sp = 0.08
@@ -125,7 +122,8 @@ def classificar():
 
 	# Calculo do valor de Sinais Vitais 
 
-	VSinais = (t * NTP + pu * PU + fr * NFR)
+	VSinais = 5 if (NTP == 5) or (NFR == 5) or (PU == 5) else (t * NTP + pu * PU + fr * NFR)
+
 
 	# Calculo do Risco GUT
 
@@ -135,7 +133,7 @@ def classificar():
 
 	situacao = 1
 
-	if(RGUT > 8 and RGUT <= 10):
+	if(RGUT > 7 and RGUT <= 10):
 		situacao = 2
 
 	elif(RGUT > 10 and RGUT <= 44):
