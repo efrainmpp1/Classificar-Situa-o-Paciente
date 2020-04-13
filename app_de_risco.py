@@ -136,14 +136,19 @@ def classificar():
 	if(RGUT > 7 and RGUT <= 10):
 		situacao = 2
 
-	elif(RGUT > 10 and RGUT <= 44):
+	elif(RGUT > 10 and RGUT <= 40):
 		situacao = 3
 
-	elif(RGUT > 44 and RGUT < 53):
+	elif(RGUT > 40 and RGUT < 50):
 		situacao = 4
 
-	elif(RGUT >= 53):
+	elif(RGUT >= 50):
 		situacao = 5
+
+	# Caso ele tenha algum dos sinais vitais critico e o calculo do risco for inferior a 10 , forçamos a ser uma situacao 3
+
+	if (VSinais == 5) and (RGUT <= 10):
+		situacao = 3
 
 	return { 'situacao' : situacao }
 
